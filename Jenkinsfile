@@ -4,8 +4,8 @@ pipeline {
         maven 'localmaven'
     }
     parameters {
-         string(name: 'jenkins-tomcat', defaultValue: 'localhost', description: 'Staging Server')
-         string(name: 'jenkins-tomcat2', defaultValue: 'localhost', description: 'Production Server')
+         string(name: 'tomcat_dev', defaultValue: 'localhost', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: 'localhost', description: 'Production Server')
     }
 
     triggers {
@@ -29,13 +29,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp **/target/*.war hiran@${params.jenkins-tomcat}:/home/hiran/jenkins-tomcat/webapps"
+                        sh "cp **/target/*.war hiran@${params.tomcat_dev}:/home/hiran/jenkins-tomcat/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp **/target/*.war hiran@${params.jenkins-tomcat2}:/home/hiran/jenkins-tomcat2/webapps"
+                        sh "cp **/target/*.war hiran@${params.tomcat_prod}:/home/hiran/jenkins-tomcat2/webapps"
                     }
                 }
             }
