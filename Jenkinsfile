@@ -29,13 +29,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp **/target/*.war hiran@${params.tomcat_dev}:/home/hiran/jenkins-tomcat/webapps"
+                        sh "cp **/target/*.war ${params.tomcat_dev}:/home/hiran/jenkins-tomcat/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp **/target/*.war hiran@${params.tomcat_prod}:/home/hiran/jenkins-tomcat2/webapps"
+                        sh "cp **/target/*.war ${params.tomcat_prod}:/home/hiran/jenkins-tomcat2/webapps"
                     }
                 }
             }
